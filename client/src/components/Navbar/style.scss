@@ -1,0 +1,38 @@
+.cs-navbar-container {
+    height: 100vh;
+    align-items: flex-start;
+}
+
+.cs-navbar {
+    padding: 0;
+}
+
+.cs-navbar li.nav-item {
+    padding: 5px 20px;
+    font-size: 20px;
+}
+
+.cs-navbar li.nav-item a {
+    color: #eeeeee;
+}
+
+
+.cs-navbar-logo-container {
+    height: 200px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+span.nav-link-img-container {
+    display: inline-block;
+    width: 65px;
+    text-align: center;
+}
+
+.cs-navbar-menu-img-light {
+    height: 25px;
+}

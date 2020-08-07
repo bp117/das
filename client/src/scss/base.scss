@@ -1,0 +1,33 @@
+@import './variables';
+@import './fonts';
+@import './fieldChooser.scss';
+@import "~react-image-gallery/styles/scss/image-gallery.scss";
+
+
+body {
+  
+}
+
+
+@for $i from 1 through 30 {
+  $value: $i * 5;
+  .mt-#{$value} {
+    margin-top: #{$value}px;
+  }
+}
+
+@for $i from 6 through 30 {
+  $value: $i * 2;
+  .fs-#{$value} {
+    font-size: #{$value}px !important;
+  }
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@import 'bootstrap/scss/bootstrap';
+
+@import './general';

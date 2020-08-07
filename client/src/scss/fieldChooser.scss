@@ -1,0 +1,79 @@
+body {
+    background-color: #eeeeee;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: lighter;
+    font-size: 1.2em;
+}
+
+.jqplugin-master-container {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 16px;
+    max-height: 500px;
+}
+
+.jqplugin-parent-container {
+    border: 1px solid #bbbbbb;
+    min-width: 300px;
+    min-height: 500px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.jqplugin-container {
+    flex: 1;
+    overflow: auto;
+}
+
+.jqplugin-source-selectall {
+    border-top: 1px solid #ddd;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #444;
+}
+
+.jqplugin-container-deleteall {
+    border-top: 1px solid #ddd;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #444;
+}
+
+.jqpn-listitem{
+    padding: 10px 15px;
+    background-color: rgb(245, 245, 245);
+    border-bottom: 1px solid rgb(230, 230, 230);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    height: 42px;
+}
+
+input.jqplugin-search-input {
+    border: 1px solid #dddddd;
+    padding: 4px 12px;
+    display: block;
+    flex: 1;
+    border-radius: 2px;
+}
+
+div.jqplugin-search-container {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 15px;
+    display: flex;
+}
+
+.jqpn-selected {
+    background-color: rgb(211, 211, 211);
+}
+
+.jqplugin-heading-container {
+    padding: 15px 15px;
+    padding-bottom: 0;
+    font-weight: 400;
+}
+
+svg.jqpn-listitem-text-svg {
+    height: 20px;
+}
