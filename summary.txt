@@ -1,0 +1,21 @@
+Summary of the document:
+The document discusses the company's use of various financial instruments to manage foreign currency and interest rate risks. The company uses forward foreign currency exchange contracts to minimize risks related to certain projected inventory purchases. In 2018, in relation to the Versace acquisition, the company entered into a derivative contract that wasn't designated as an accounting hedge and was settled later that year. It also uses net investment hedges through fixed-to-fixed cross-currency swap agreements, with most contracts maturing between 2022 and 2027. In Fiscal 2020, the company terminated all its net investment hedges related to its Euro-denominated subsidiaries, recognizing a pre-tax gain. The company also records the cross-currency basis spread as a reduction in interest expense. As of March 2021, the company had an interest rate swap to mitigate the impact of adverse interest rate fluctuations on a portion of the company’s variable-rate debt. Changes in the fair value of the interest rate swap are recorded in equity as a component of accumulated other comprehensive income (loss) and reclassified into interest expense.
+
+Give me the interest rate swaps
+As of March 27, 2021, the Company had an interest rate swap with an initial notional amount of $500 million that will decrease to $350 million in April 2022. The interest rate swap is designed to mitigate the impact of adverse interest rate fluctuations for a portion of the Company’s variable-rate debt equal to the notional amount of the swap. The interest rate swap converts the one-month Adjusted LIBOR interest rate on these borrowings to a fixed interest rate of 0.237% through December 2022.
+
+Give me the interest rate swaps and the response should be in the JSON format code block
+```
+{
+  "Interest Rate Swap": {
+    "Current Status": "As of March 27, 2021",
+    "Initial Notional Amount": "$500 million",
+    "Amount Decreased": "to $350 million in April 2022",
+    "Designation": "Cash flow hedge",
+    "Purpose": "Mitigate the impact of adverse interest rate fluctuations for a portion of the Company’s variable-rate debt equal to the notional amount of the swap",
+    "Conversion": "The interest rate swap converts the one-month Adjusted LIBOR interest rate on these borrowings to a fixed interest rate of 0.237% through December 2022",
+    "Accounting": "When an interest rate swap agreement qualifies for hedge accounting as a cash flow hedge, the changes in the fair value are recorded in equity as a component of accumulated other comprehensive income (loss) and are reclassified into interest expense in the same period during which the hedged transactions affect earnings",
+    "Interest Expense": "During Fiscal 2021, the Company recorded an immaterial amount of interest expense related to this agreement"
+  }
+}
+```
