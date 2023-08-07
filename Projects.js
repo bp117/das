@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, Checkbox, Button, TextField, Switch, FormControlLabel } from '@mui/material';
+import { Dialog, Checkbox, Button, TextField, Switch, FormControlLabel, IconButton, Menu, MenuItem } from '@mui/material';
 import PlusIcon from '@mui/icons-material/Add';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 function Projects() {
     const [open, setOpen] = useState(false);
@@ -18,6 +19,8 @@ function Projects() {
     });
 
     useEffect(() => {
+        // Placeholder for fetching existing projects from the backend
+        // For this example, we'll assume the API is at '/api/projects'
         async function fetchProjects() {
             try {
                 const response = await fetch('/api/projects');
@@ -32,6 +35,11 @@ function Projects() {
     }, []);
 
     const handleCreateProject = async () => {
+        if (newProject.allowedFileTypes.xls && !newProject.metadataAvailable) {
+            alert('Metadata needs to be available for XLS files!');
+            return;
+        }
+
         try {
             const response = await fetch('/api/projects', {
                 method: 'POST',
@@ -43,7 +51,7 @@ function Projects() {
 
             const data = await response.json();
             if (data.success) {
-                setProjects(prevProjects => [...prevProjects, newProject]);
+                setProjects(prevProjects => [...prevProjects, data.project]);
                 setOpen(false);
             } else {
                 console.error('Failed to create project:', data.error);
@@ -116,11 +124,26 @@ function Projects() {
                 </div>
             </Dialog>
 
-            {projects.map(project => (
-                <div key={project.id}>
-                    {/* Render each project */}
+            {projects.length === 0 ? (
+                <div className="flex flex-col items-center opacity-50">
+                    <img src="/path-to-placeholder-image.png" alt="Projects Placeholder" className="w-64 h-64" />
+                    <p>Team projects will show up here</p>
                 </div>
-            ))}
+            ) : (
+                <div className="space-y-4">
+                    {projects.map(project => (
+                        <div key={project.id} className="flex justify-between items-center border p-4 rounded-lg">
+                            <div>
+                                <p className="font-bold">{project.name}</p>
+                                <p>Created by: {project.createdBy}</p>
+                            </div>
+                            <IconButton>
+                                <MoreVertIcon />
+                            </IconButton>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
