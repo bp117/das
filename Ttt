@@ -1,0 +1,82 @@
+// ... [imports and other code]
+
+function RiskChatExplorer({chatInputText, setChatInputText}) {
+    // ... [Existing useState, useRef and functions]
+
+    const [areActionsEnabled, setActionsEnabled] = useState(true); // State to toggle action buttons
+
+    const actionButtons = [
+        // ... [Existing actionButtons array]
+    ];
+
+    const handleActionButtonClick = (actionPrefix) => {
+        if (areActionsEnabled) {
+            // Prefix the action text to the current chat input
+            setChatInputText(prevText => actionPrefix + prevText);
+        }
+    }
+
+    return (
+        <div id="app">
+            {/* ... [Existing code] */}
+
+            <div className="action-toolbar">
+                <div className="action-buttons">
+                    {actionButtons.map((btn, index) => (
+                        <button key={index} type="button" disabled={!areActionsEnabled} onClick={() => handleActionButtonClick(btn.prefix)}>
+                            <img src={btn.icon} alt={btn.alt} />
+                        </button>
+                    ))}
+                </div>
+
+                <label className="toggle-actions">
+                    <input type="checkbox" checked={areActionsEnabled} onChange={() => setActionsEnabled(!areActionsEnabled)} />
+                    Toggle Actions
+                </label>
+            </div>
+
+            {/* ... [Existing form code] */}
+        </div>
+    );
+}
+
+.action-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Spacing between buttons */
+}
+
+.action-buttons button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.action-buttons button:disabled {
+    background-color: #bdc3c7; /* Color when disabled */
+    cursor: not-allowed;
+}
+
+.toggle-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between checkbox and label */
+}
+
+.toggle-actions input {
+    cursor: pointer;
+}
+ default RiskChatExplorer;
