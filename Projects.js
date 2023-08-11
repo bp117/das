@@ -94,14 +94,25 @@ function Projects() {
                                     <Checkbox
                                         checked={newProject.allowedFileTypes[fileType]}
                                         onChange={e => {
-                                            setNewProject(prev => ({
-                                                ...prev,
-                                                allowedFileTypes: {
-                                                    ...prev.allowedFileTypes,
-                                                    [fileType]: e.target.checked
-                                                }
-                                            }));
-                                        }}
+                                             if (fileType === 'xls' && e.target.checked) {
+                        setNewProject(prev => ({
+                            ...prev,
+                            allowedFileTypes: {
+                                ...prev.allowedFileTypes,
+                                [fileType]: e.target.checked
+                            },
+                            metadataAvailable: true // Automatically set this to true when 'xls' is checked.
+                        }));
+                    } else {
+                        setNewProject(prev => ({
+                            ...prev,
+                            allowedFileTypes: {
+                                ...prev.allowedFileTypes,
+                                [fileType]: e.target.checked
+                            }
+                        }));
+                    }
+                }}
                                     />
                                 }
                                 label={fileType.toUpperCase()}
