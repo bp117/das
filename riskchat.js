@@ -1,3 +1,51 @@
+// When receiving data, update the chat state like this:
+setChat((prevChat) => prevChat.map((ch) => {
+    if (ch.uniqueId === uniqueId) {
+        return {
+            ...ch,
+            value: results,
+            duration: data.duration,
+            activeTab: 0
+        };
+    }
+    return ch;
+}));
+
+// Render tabs like this:
+{chat.map((item, index) => (
+    // ... [rest of the code]
+    {Array.isArray(item.value) ? (
+        <div>
+            <Tabs value={item.activeTab} 
+                  onChange={(event, newValue) => handleTabChange(index, newValue)}>
+                {item.value.map((_, idx) => (
+                    <Tab label={`Result ${idx + 1}`} key={idx} />
+                ))}
+            </Tabs>
+            {item.value.map((result, idx) => (
+                // ... [rest of the tab content]
+            ))}
+        </div>
+    ) : (
+        <div className="message" id={item.uniqueId || ''}>{item.value}</div>
+    )}
+    // ... [rest of the code]
+))}
+
+// Add this function to handle tab change:
+const handleTabChange = (chatIndex, newTabValue) => {
+    setChat((prevChat) => prevChat.map((ch, index) => {
+        if (index === chatIndex) {
+            return {
+                ...ch,
+                activeTab: newTabValue
+            };
+        }
+        return ch;
+    }));
+};
+
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Tab, Tabs, Card, CardHeader, CardContent, Typography, Link } from '@mui/material';
 import bot from './chatgpt.png';
