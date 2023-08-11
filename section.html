@@ -361,3 +361,16 @@ function handlePromptClick(prompt) {
   setChatInputText(prompt);
 }
 
+
+     <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      >
+        <Alert onClose={handleClose} severity={severity} variant="filled">
+          {message}
+        </Alert>
+      </Snackbar>
+    </>
+
