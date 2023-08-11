@@ -1,0 +1,82 @@
+import { useState } from 'react';
+import Switch from '@mui/material/Switch';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+
+// ... [Rest of your imports]
+
+function PromptsTab({ prompts }) {
+  const [tabValue, setTabValue] = useState('recommended');
+
+  return (
+    <div>
+      <Tabs value={tabValue} onChange={(e, newValue) => setTabValue(newValue)}>
+        <Tab value="recommended" label="Recommended" />
+        <Tab value="custom" label="Custom" />
+      </Tabs>
+      {tabValue === 'recommended' && (
+        <ul>
+          {prompts.recommended.map((prompt, index) => (
+            <li key={index}>{prompt}</li>
+          ))}
+        </ul>
+      )}
+      {tabValue === 'custom' && (
+        <ul>
+          {prompts.custom.map((prompt, index) => (
+            <li key={index}>{prompt}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function ChatFooter({ chatInputText, setChatInputText }) {
+  const [showPrompts, setShowPrompts] = useState(false);
+  const prompts = {
+    recommended: ['Prompt 1', 'Prompt 2'], 
+    custom: ['Custom Prompt 1', 'Custom Prompt 2']
+  };
+
+  return (
+    <div className="chat-footer">
+      {showPrompts && <PromptsTab prompts={prompts} />}
+      {/* Action Toolbar */}
+      <div className="actions-toolbar">
+        <Box display="flex" justifyContent="space-between" width="100%">
+          {/* ... [Your IconButton components for actions] */}
+        </Box>
+      </div>
+      {/* Form Container */}
+      <form onSubmit={handleSubmit}>
+        <textarea 
+          name="prompt" 
+          rows="1" 
+          cols="1" 
+          placeholder="Ask AI..." 
+          value={chatInputText} 
+          onChange={(e) => setChatInputText(e.target.value)}
+        ></textarea>
+        <IconButton onClick={() => setShowPrompts(!showPrompts)}>
+          {/* Replace with an appropriate icon for showing/hiding prompts */}
+          <Icon />
+        </IconButton>
+        <button type="submit"><img src="./send.svg" alt="send" /></button>
+      </form>
+    </div>
+  );
+}
+
+function RiskChatExplorer({ chatInputText, setChatInputText }) {
+  // ... [Existing component body]
+
+  return (
+    <div id="app">
+      {/* ... [Rest of the chat explorer component] */}
+      <ChatFooter chatInputText={chatInputText} setChatInputText={setChatInputText} />
+    </div>
+  );
+}
