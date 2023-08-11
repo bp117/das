@@ -277,4 +277,87 @@ function PromptsTab({ prompts }) {
     </div>
   );
 }
+.................new prompts....................
+          const [showSaveModal, setShowSaveModal] = useState(false);
+const [saveInputValue, setSaveInputValue] = useState('');
+const handleSavePrompt = () => {
+  let savedPrompts = localStorage.getItem('savedPrompts');
+  savedPrompts = savedPrompts ? JSON.parse(savedPrompts) : [];
+  savedPrompts.push(saveInputValue);
+
+  localStorage.setItem('savedPrompts', JSON.stringify(savedPrompts));
+  
+  // Update your custom prompts state with this new savedPrompt
+  setCustomPrompts([...customPrompts, saveInputValue]);
+
+  setSaveInputValue(''); // Clear the input field
+  setShowSaveModal(false); // Hide the modal
+};
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+// Inside your component's return statement
+
+<Dialog open={showSaveModal} onClose={() => setShowSaveModal(false)}>
+  <DialogTitle>Save Prompt</DialogTitle>
+  <DialogContent>
+    <DialogContentText>
+      Enter your prompt to save it for future reference.
+    </DialogContentText>
+    <TextField
+      autoFocus
+      margin="dense"
+      label="Prompt"
+      type="text"
+      fullWidth
+      value={saveInputValue}
+      onChange={e => setSaveInputValue(e.target.value)}
+    />
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={() => setShowSaveModal(false)} color="primary">
+      Cancel
+    </Button>
+    <Button onClick={handleSavePrompt} color="primary">
+      Save
+    </Button>
+  </DialogActions>
+</Dialog>
+import SaveIcon from '@mui/icons-material/Save';
+
+// In the form section:
+
+<form onSubmit={handleSubmit}>
+  <Switch {...switchProps} />
+  <textarea 
+    name="prompt" 
+    rows="1" 
+    cols="1" 
+    placeholder="Ask AI..." 
+    value={chatInputText} 
+    onChange={(e) => setChatInputText(e.target.value)}
+  />
+  <IconButton type="submit">
+    <SendIcon />
+  </IconButton>
+  <IconButton onClick={() => setShowSaveModal(true)}>
+    <SaveIcon />
+  </IconButton>
+</form>
+const [customPrompts, setCustomPrompts] = useState([]);
+
+useEffect(() => {
+  const savedPrompts = localStorage.getItem('savedPrompts');
+  if (savedPrompts) {
+    setCustomPrompts(JSON.parse(savedPrompts));
+  }
+}, []);
+function handlePromptClick(prompt) {
+  setChatInputText(prompt);
+}
 
