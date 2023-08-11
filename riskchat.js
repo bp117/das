@@ -1,36 +1,12 @@
-// When receiving data, update the chat state like this:
-setChat((prevChat) => prevChat.map((ch) => {
-    if (ch.uniqueId === uniqueId) {
-        return {
-            ...ch,
-            value: results,
-            duration: data.duration,
-            activeTab: 0
-        };
-    }
-    return ch;
-}));
+const [activeTabs, setActiveTabs] = useState({});
 
-// Render tabs like this:
-{chat.map((item, index) => (
-    // ... [rest of the code]
-    {Array.isArray(item.value) ? (
-        <div>
-            <Tabs value={item.activeTab} 
-                  onChange={(event, newValue) => handleTabChange(index, newValue)}>
-                {item.value.map((_, idx) => (
-                    <Tab label={`Result ${idx + 1}`} key={idx} />
-                ))}
-            </Tabs>
-            {item.value.map((result, idx) => (
-                // ... [rest of the tab content]
-            ))}
-        </div>
-    ) : (
-        <div className="message" id={item.uniqueId || ''}>{item.value}</div>
-    )}
-    // ... [rest of the code]
-))}
+const handleTabChange = (uniqueId, newValue) => {
+    setActiveTabs(prevTabs => ({
+        ...prevTabs,
+        [uniqueId]: newValue
+    }));
+};
+
 
 // Add this function to handle tab change:
 const handleTabChange = (chatIndex, newTabValue) => {
@@ -44,6 +20,25 @@ const handleTabChange = (chatIndex, newTabValue) => {
         return ch;
     }));
 };
+{Array.isArray(item.value) ? (
+    <div>
+        <Tabs value={activeTabs[item.uniqueId] || 0}
+              onChange={(event, newValue) => handleTabChange(item.uniqueId, newValue)}>
+            {item.value.map((_, idx) => (
+                <Tab label={`Result ${idx + 1}`} key={idx} />
+            ))}
+        </Tabs>
+        {item.value.map((result, idx) => (
+            activeTabs[item.uniqueId] === idx && (
+                <div key={idx}>
+                    // ... content ...
+                </div>
+            )
+        ))}
+    </div>
+) : (
+    <div className="message" id={item.uniqueId || ''}>{item.value}</div>
+)}
 
 
 import React, { useState, useRef, useEffect } from 'react';
